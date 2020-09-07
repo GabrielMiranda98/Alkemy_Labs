@@ -1,0 +1,49 @@
+﻿@model Gestor_Presupuesto.Models.ViewModels.AbmViewModels
+@{
+    ViewBag.Title = "New deposit";
+}
+<br />
+<br />
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Alta", "Abm", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.Amount)
+                @Html.TextBoxFor(d => d.Amount, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Amount, null, new { @class = "red" })<br />
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Concept)
+                @Html.TextBoxFor(d => d.Concept, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Concept, null, new { @class = "red" })<br />
+            </div>
+            <div>
+                @Html.LabelFor(d => d.IdType)
+                @Html.TextBoxFor(d => d.IdType, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IdType, null, new { @class = "red" })<br />
+            </div>
+
+            <div>
+                @Html.LabelFor(d => d.Operations_registered)
+                @Html.TextBoxFor(d => d.Operations_registered, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Operations_registered, null, new { @class = "red" })<br />
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.Date)
+                @Html.EditorFor(d => d.Date, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Date, null, new { @class = "red" })<br />
+
+            </div>
+
+            <div style="text-align:right">
+                <input value="Save" class="btn btn-primary" type="submit" />
+
+            </div>
+        </div>
+    </div>
+}
+

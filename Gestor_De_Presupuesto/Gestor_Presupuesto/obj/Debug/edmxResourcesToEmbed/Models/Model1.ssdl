@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="presupuestos_gestorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="abm">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="concept" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="idType" Type="int" Nullable="false" />
+    <Property Name="operations_registered" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dbType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="remove_cash" Type="int" Nullable="false" />
+    <Property Name="deposit_money" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_abm_dbType">
+    <End Role="dbType" Type="Self.dbType" Multiplicity="1" />
+    <End Role="abm" Type="Self.abm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dbType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="abm">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="presupuestos_gestorModelStoreContainer">
+    <EntitySet Name="abm" EntityType="Self.abm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dbType" EntityType="Self.dbType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_abm_dbType" Association="Self.FK_abm_dbType">
+      <End Role="dbType" EntitySet="dbType" />
+      <End Role="abm" EntitySet="abm" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

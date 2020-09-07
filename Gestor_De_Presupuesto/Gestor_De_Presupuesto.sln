@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestor_De_Presupuesto", "Gestor_De_Presupuesto\Gestor_De_Presupuesto.csproj", "{4254FF06-DD12-4024-A9A5-A1DDC8473EAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestor_Presupuesto", "Gestor_Presupuesto\Gestor_Presupuesto.csproj", "{3FAB11B8-4FAE-41DB-B47E-17C500280924}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4254FF06-DD12-4024-A9A5-A1DDC8473EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4254FF06-DD12-4024-A9A5-A1DDC8473EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4254FF06-DD12-4024-A9A5-A1DDC8473EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4254FF06-DD12-4024-A9A5-A1DDC8473EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FAB11B8-4FAE-41DB-B47E-17C500280924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FAB11B8-4FAE-41DB-B47E-17C500280924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FAB11B8-4FAE-41DB-B47E-17C500280924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FAB11B8-4FAE-41DB-B47E-17C500280924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

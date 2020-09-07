@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Gestor_PresupuestoModelStoreContainer" CdmEntityContainer="Gestor_PresupuestoEntities3">
+    <EntitySetMapping Name="ABM">
+      <EntityTypeMapping TypeName="Gestor_PresupuestoModel.ABM">
+        <MappingFragment StoreEntitySet="ABM">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="concept" ColumnName="concept" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="operations_registered" ColumnName="operations_registered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPE">
+      <EntityTypeMapping TypeName="Gestor_PresupuestoModel.TYPE">
+        <MappingFragment StoreEntitySet="TYPE">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="remove_cash" ColumnName="remove_cash" />
+          <ScalarProperty Name="deposit_money" ColumnName="deposit_money" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

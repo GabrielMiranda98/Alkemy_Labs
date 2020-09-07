@@ -1,0 +1,36 @@
+﻿@model List<Gestor_Presupuesto.Models.ViewModels.AbmViewModels>
+@{
+    ViewBag.Title = "List Operations";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row" style="text-align:right;padding:5px">
+    <a href="~/Abm/Alta" class="btn-primary">New</a>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <th>Concept</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Operations registered</th>
+                </tr>
+                @foreach (var oElemento in Model)
+                {
+
+                    <tr>
+                        <td>@oElemento.Concept </td>
+                        <td>@oElemento.Amount</td>
+                        <td>@oElemento.Date</td>
+                        <td>@oElemento.IdType</td>
+                        <td>@oElemento.Operations_registered</td>
+                    </tr>
+                }
+            </table>>
+        </div>
+
+
+    </div>
+</div>

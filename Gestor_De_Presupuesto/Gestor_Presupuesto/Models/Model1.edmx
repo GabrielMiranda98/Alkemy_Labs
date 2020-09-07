@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="presupuestos_gestorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="abm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="concept" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="idType" Type="int" Nullable="false" />
+          <Property Name="operations_registered" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dbType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="remove_cash" Type="int" Nullable="false" />
+          <Property Name="deposit_money" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_abm_dbType">
+          <End Role="dbType" Type="Self.dbType" Multiplicity="1" />
+          <End Role="abm" Type="Self.abm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dbType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="abm">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="presupuestos_gestorModelStoreContainer">
+          <EntitySet Name="abm" EntityType="Self.abm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dbType" EntityType="Self.dbType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_abm_dbType" Association="Self.FK_abm_dbType">
+            <End Role="dbType" EntitySet="dbType" />
+            <End Role="abm" EntitySet="abm" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="presupuestos_gestorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="abm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="concept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idType" Type="Int32" Nullable="false" />
+          <Property Name="operations_registered" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dbType" Relationship="Self.FK_abm_dbType" FromRole="abm" ToRole="dbType" />
+        </EntityType>
+        <EntityType Name="dbType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="remove_cash" Type="Int32" Nullable="false" />
+          <Property Name="deposit_money" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="abm" Relationship="Self.FK_abm_dbType" FromRole="dbType" ToRole="abm" />
+        </EntityType>
+        <Association Name="FK_abm_dbType">
+          <End Role="dbType" Type="Self.dbType" Multiplicity="1" />
+          <End Role="abm" Type="Self.abm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dbType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="abm">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="presupuestos_gestorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="abm" EntityType="Self.abm" />
+          <EntitySet Name="dbType" EntityType="Self.dbType" />
+          <AssociationSet Name="FK_abm_dbType" Association="Self.FK_abm_dbType">
+            <End Role="dbType" EntitySet="dbType" />
+            <End Role="abm" EntitySet="abm" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="presupuestos_gestorModelStoreContainer" CdmEntityContainer="presupuestos_gestorEntities">
+          <EntitySetMapping Name="abm">
+            <EntityTypeMapping TypeName="presupuestos_gestorModel.abm">
+              <MappingFragment StoreEntitySet="abm">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="concept" ColumnName="concept" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="idType" ColumnName="idType" />
+                <ScalarProperty Name="operations_registered" ColumnName="operations_registered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dbType">
+            <EntityTypeMapping TypeName="presupuestos_gestorModel.dbType">
+              <MappingFragment StoreEntitySet="dbType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="remove_cash" ColumnName="remove_cash" />
+                <ScalarProperty Name="deposit_money" ColumnName="deposit_money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

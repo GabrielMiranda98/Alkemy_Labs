@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Gestor_PresupuestoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ABM">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="concept" Type="varchar" MaxLength="50" />
+    <Property Name="amount" Type="float" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="idType" Type="int" />
+    <Property Name="operations_registered" Type="int" />
+  </EntityType>
+  <EntityType Name="TYPE">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="remove_cash" Type="int" />
+    <Property Name="deposit_money" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_ABM_TYPE">
+    <End Role="TYPE" Type="Self.TYPE" Multiplicity="0..1" />
+    <End Role="ABM" Type="Self.ABM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ABM">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Gestor_PresupuestoModelStoreContainer">
+    <EntitySet Name="ABM" EntityType="Self.ABM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TYPE" EntityType="Self.TYPE" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ABM_TYPE" Association="Self.FK_ABM_TYPE">
+      <End Role="TYPE" EntitySet="TYPE" />
+      <End Role="ABM" EntitySet="ABM" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

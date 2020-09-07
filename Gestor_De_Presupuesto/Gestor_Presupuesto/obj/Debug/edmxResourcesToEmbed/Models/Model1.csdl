@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="presupuestos_gestorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="abm">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="concept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="idType" Type="Int32" Nullable="false" />
+    <Property Name="operations_registered" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="dbType" Relationship="Self.FK_abm_dbType" FromRole="abm" ToRole="dbType" />
+  </EntityType>
+  <EntityType Name="dbType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="remove_cash" Type="Int32" Nullable="false" />
+    <Property Name="deposit_money" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="abm" Relationship="Self.FK_abm_dbType" FromRole="dbType" ToRole="abm" />
+  </EntityType>
+  <Association Name="FK_abm_dbType">
+    <End Role="dbType" Type="Self.dbType" Multiplicity="1" />
+    <End Role="abm" Type="Self.abm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dbType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="abm">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="presupuestos_gestorEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="abm" EntityType="Self.abm" />
+    <EntitySet Name="dbType" EntityType="Self.dbType" />
+    <AssociationSet Name="FK_abm_dbType" Association="Self.FK_abm_dbType">
+      <End Role="dbType" EntitySet="dbType" />
+      <End Role="abm" EntitySet="abm" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
