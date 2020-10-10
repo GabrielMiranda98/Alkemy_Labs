@@ -1,0 +1,41 @@
+﻿@model List<University.Models.TableViewModels.AdminTableTeacher>
+@{
+    ViewBag.Title = "Index";
+    
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<h2>Teachers: </h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Active</th>
+                <th>Dni</th>
+
+
+            </tr>
+            @foreach (var pElemento in Model)
+            {
+
+                <tr>
+                    <th>@pElemento.Id</th>
+                    <th>@pElemento.Name</th>
+                    <th>@pElemento.Surname</th>
+                    <th>@pElemento.Active</th>
+                    <th>@pElemento.Dni</th>
+
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>
+
+

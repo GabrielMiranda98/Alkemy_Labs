@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="universityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="universityEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admin" EntityType="universityModel.admin" />
+    <EntitySet Name="student" EntityType="universityModel.student" />
+    <EntitySet Name="user" EntityType="universityModel.user" />
+    <AssociationSet Name="FK_user_student" Association="universityModel.FK_user_student">
+      <End Role="student" EntitySet="student" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <EntitySet Name="teacher" EntityType="universityModel.teacher" />
+    <AssociationSet Name="FK_admin_teacher" Association="universityModel.FK_admin_teacher">
+      <End Role="teacher" EntitySet="teacher" />
+      <End Role="admin" EntitySet="admin" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idTeacher" Type="Int32" />
+    <NavigationProperty Name="teacher" Relationship="universityModel.FK_admin_teacher" FromRole="admin" ToRole="teacher" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="time" Type="DateTime" Precision="3" />
+    <Property Name="teacher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="maxStudent" Type="Int32" />
+    <NavigationProperty Name="user" Relationship="universityModel.FK_user_student" FromRole="student" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="passwordd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idStudent" Type="Int32" />
+    <NavigationProperty Name="student" Relationship="universityModel.FK_user_student" FromRole="user" ToRole="student" />
+  </EntityType>
+  <Association Name="FK_user_student">
+    <End Type="universityModel.student" Role="student" Multiplicity="0..1" />
+    <End Type="universityModel.user" Role="user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="idStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="teacher">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Int32" />
+    <NavigationProperty Name="admin" Relationship="universityModel.FK_admin_teacher" FromRole="teacher" ToRole="admin" />
+  </EntityType>
+  <Association Name="FK_admin_teacher">
+    <End Type="universityModel.teacher" Role="teacher" Multiplicity="0..1" />
+    <End Type="universityModel.admin" Role="admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="admin">
+        <PropertyRef Name="idTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
