@@ -1,0 +1,45 @@
+﻿@model List<University.Models.TableViewModels.UserTableSubjet>
+@{
+    ViewBag.Title = "Subject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Teachers:</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Info</th>
+                <th>Teacher</th>
+                <th>Time</th>
+                <th>MaxStudent</th>
+
+
+            </tr>
+            @foreach (var pElemento in Model)
+            {
+
+        <tr>
+            <th>@pElemento.Id</th>
+            <th>@pElemento.Name</th>
+            <th>@pElemento.Info</th>
+            <th>@pElemento.Teacher</th>
+            <th>@pElemento.Time</th>
+            <th>@pElemento.MaxStudent</th>
+
+
+
+
+        </tr>
+            }
+        </table>
+    </div>
+
+</div>
+
+

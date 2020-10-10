@@ -21,12 +21,11 @@ namespace University.Filters
                     filterContext.HttpContext.Response.Redirect("~/Admin/Index");
                 }
             }
-            else if (admin!=null&&filterContext.Controller is AdminController == true)
+            else if (admin != null && filterContext.Controller is AdminController == true)
             {
                 filterContext.HttpContext.Response.Redirect("~/Teacher/Index");
 
             }
-
             base.OnActionExecuting(filterContext);
         }
     }

@@ -26,8 +26,8 @@ namespace University.Models
         }
     
         public virtual DbSet<admin> admin { get; set; }
-        public virtual DbSet<student> student { get; set; }
-        public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<subjet> subjet { get; set; }
         public virtual DbSet<teacher> teacher { get; set; }
+        public virtual DbSet<user> user { get; set; }
     }
 }

@@ -11,23 +11,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="student">
-      <EntityTypeMapping TypeName="universityModel.student">
-        <MappingFragment StoreEntitySet="student">
+    <EntitySetMapping Name="subjet">
+      <EntityTypeMapping TypeName="universityModel.subjet">
+        <MappingFragment StoreEntitySet="subjet">
+          <ScalarProperty Name="info" ColumnName="info" />
           <ScalarProperty Name="maxStudent" ColumnName="maxStudent" />
           <ScalarProperty Name="teacher" ColumnName="teacher" />
           <ScalarProperty Name="time" ColumnName="time" />
           <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="user">
-      <EntityTypeMapping TypeName="universityModel.user">
-        <MappingFragment StoreEntitySet="user">
-          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
-          <ScalarProperty Name="passwordd" ColumnName="passwordd" />
-          <ScalarProperty Name="user1" ColumnName="user" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -39,6 +30,16 @@
           <ScalarProperty Name="dni" ColumnName="dni" />
           <ScalarProperty Name="surname" ColumnName="surname" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="universityModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="idSubjet" ColumnName="idSubjet" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user1" ColumnName="user" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

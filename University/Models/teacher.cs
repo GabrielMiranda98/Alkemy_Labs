@@ -18,6 +18,7 @@ namespace University.Models
         public teacher()
         {
             this.admin = new HashSet<admin>();
+            this.subjet = new HashSet<subjet>();
         }
     
         public int id { get; set; }
@@ -28,5 +29,7 @@ namespace University.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<admin> admin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<subjet> subjet { get; set; }
     }
 }

@@ -9,15 +9,16 @@
     <Property Name="password" Type="varchar" MaxLength="50" />
     <Property Name="idTeacher" Type="int" />
   </EntityType>
-  <EntityType Name="student">
+  <EntityType Name="subjet">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="time" Type="datetime" />
-    <Property Name="teacher" Type="varchar" MaxLength="50" />
+    <Property Name="teacher" Type="int" />
     <Property Name="maxStudent" Type="int" />
+    <Property Name="info" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="teacher">
     <Key>
@@ -35,8 +36,8 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="user" Type="varchar" MaxLength="50" />
-    <Property Name="passwordd" Type="varchar" MaxLength="50" />
-    <Property Name="idStudent" Type="int" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="idSubjet" Type="int" />
   </EntityType>
   <Association Name="FK_admin_teacher">
     <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
@@ -50,29 +51,45 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_subjet_teacher">
+    <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
+    <End Role="subjet" Type="Self.subjet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="teacher">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="subjet">
+        <PropertyRef Name="teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_user_student">
-    <End Role="student" Type="Self.student" Multiplicity="0..1" />
+    <End Role="subjet" Type="Self.subjet" Multiplicity="0..1" />
     <End Role="user" Type="Self.user" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="student">
+      <Principal Role="subjet">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="user">
-        <PropertyRef Name="idStudent" />
+        <PropertyRef Name="idSubjet" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="universityModelStoreContainer">
     <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subjet" EntityType="Self.subjet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_admin_teacher" Association="Self.FK_admin_teacher">
       <End Role="teacher" EntitySet="teacher" />
       <End Role="admin" EntitySet="admin" />
     </AssociationSet>
+    <AssociationSet Name="FK_subjet_teacher" Association="Self.FK_subjet_teacher">
+      <End Role="teacher" EntitySet="teacher" />
+      <End Role="subjet" EntitySet="subjet" />
+    </AssociationSet>
     <AssociationSet Name="FK_user_student" Association="Self.FK_user_student">
-      <End Role="student" EntitySet="student" />
+      <End Role="subjet" EntitySet="subjet" />
       <End Role="user" EntitySet="user" />
     </AssociationSet>
   </EntityContainer>

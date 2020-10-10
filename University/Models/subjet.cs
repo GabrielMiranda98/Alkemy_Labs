@@ -12,10 +12,10 @@ namespace University.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class student
+    public partial class subjet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public student()
+        public subjet()
         {
             this.user = new HashSet<user>();
         }
@@ -23,9 +23,11 @@ namespace University.Models
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<System.DateTime> time { get; set; }
-        public string teacher { get; set; }
+        public Nullable<int> teacher { get; set; }
         public Nullable<int> maxStudent { get; set; }
+        public string info { get; set; }
     
+        public virtual teacher teacher1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> user { get; set; }
     }

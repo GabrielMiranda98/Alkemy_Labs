@@ -14,15 +14,16 @@
           <Property Name="password" Type="varchar" MaxLength="50" />
           <Property Name="idTeacher" Type="int" />
         </EntityType>
-        <EntityType Name="student">
+        <EntityType Name="subjet">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="time" Type="datetime" />
-          <Property Name="teacher" Type="varchar" MaxLength="50" />
+          <Property Name="teacher" Type="int" />
           <Property Name="maxStudent" Type="int" />
+          <Property Name="info" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="teacher">
           <Key>
@@ -40,8 +41,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user" Type="varchar" MaxLength="50" />
-          <Property Name="passwordd" Type="varchar" MaxLength="50" />
-          <Property Name="idStudent" Type="int" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="idSubjet" Type="int" />
         </EntityType>
         <Association Name="FK_admin_teacher">
           <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
@@ -55,29 +56,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_subjet_teacher">
+          <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
+          <End Role="subjet" Type="Self.subjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subjet">
+              <PropertyRef Name="teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_user_student">
-          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="subjet" Type="Self.subjet" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="student">
+            <Principal Role="subjet">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="user">
-              <PropertyRef Name="idStudent" />
+              <PropertyRef Name="idSubjet" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="universityModelStoreContainer">
           <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subjet" EntityType="Self.subjet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_admin_teacher" Association="Self.FK_admin_teacher">
             <End Role="teacher" EntitySet="teacher" />
             <End Role="admin" EntitySet="admin" />
           </AssociationSet>
+          <AssociationSet Name="FK_subjet_teacher" Association="Self.FK_subjet_teacher">
+            <End Role="teacher" EntitySet="teacher" />
+            <End Role="subjet" EntitySet="subjet" />
+          </AssociationSet>
           <AssociationSet Name="FK_user_student" Association="Self.FK_user_student">
-            <End Role="student" EntitySet="student" />
+            <End Role="subjet" EntitySet="subjet" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
@@ -87,16 +104,20 @@
       <Schema Namespace="universityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="universityEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="admin" EntityType="universityModel.admin" />
-          <EntitySet Name="student" EntityType="universityModel.student" />
-          <EntitySet Name="user" EntityType="universityModel.user" />
-          <AssociationSet Name="FK_user_student" Association="universityModel.FK_user_student">
-            <End Role="student" EntitySet="student" />
-            <End Role="user" EntitySet="user" />
-          </AssociationSet>
+          <EntitySet Name="subjet" EntityType="universityModel.subjet" />
           <EntitySet Name="teacher" EntityType="universityModel.teacher" />
+          <EntitySet Name="user" EntityType="universityModel.user" />
           <AssociationSet Name="FK_admin_teacher" Association="universityModel.FK_admin_teacher">
             <End Role="teacher" EntitySet="teacher" />
             <End Role="admin" EntitySet="admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subjet_teacher" Association="universityModel.FK_subjet_teacher">
+            <End Role="teacher" EntitySet="teacher" />
+            <End Role="subjet" EntitySet="subjet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_student" Association="universityModel.FK_user_student">
+            <End Role="subjet" EntitySet="subjet" />
+            <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="admin">
@@ -109,39 +130,19 @@
           <Property Name="idTeacher" Type="Int32" />
           <NavigationProperty Name="teacher" Relationship="universityModel.FK_admin_teacher" FromRole="admin" ToRole="teacher" />
         </EntityType>
-        <EntityType Name="student">
+        <EntityType Name="subjet">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="time" Type="DateTime" Precision="3" />
-          <Property Name="teacher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="teacher" Type="Int32" />
           <Property Name="maxStudent" Type="Int32" />
-          <NavigationProperty Name="user" Relationship="universityModel.FK_user_student" FromRole="student" ToRole="user" />
+          <Property Name="info" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="teacher1" Relationship="universityModel.FK_subjet_teacher" FromRole="subjet" ToRole="teacher" />
+          <NavigationProperty Name="user" Relationship="universityModel.FK_user_student" FromRole="subjet" ToRole="user" />
         </EntityType>
-        <EntityType Name="user">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="passwordd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="idStudent" Type="Int32" />
-          <NavigationProperty Name="student" Relationship="universityModel.FK_user_student" FromRole="user" ToRole="student" />
-        </EntityType>
-        <Association Name="FK_user_student">
-          <End Type="universityModel.student" Role="student" Multiplicity="0..1" />
-          <End Type="universityModel.user" Role="user" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="student">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user">
-              <PropertyRef Name="idStudent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="teacher">
           <Key>
             <PropertyRef Name="id" />
@@ -152,6 +153,17 @@
           <Property Name="dni" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="active" Type="Int32" />
           <NavigationProperty Name="admin" Relationship="universityModel.FK_admin_teacher" FromRole="teacher" ToRole="admin" />
+          <NavigationProperty Name="subjet" Relationship="universityModel.FK_subjet_teacher" FromRole="teacher" ToRole="subjet" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idSubjet" Type="Int32" />
+          <NavigationProperty Name="subjet" Relationship="universityModel.FK_user_student" FromRole="user" ToRole="subjet" />
         </EntityType>
         <Association Name="FK_admin_teacher">
           <End Type="universityModel.teacher" Role="teacher" Multiplicity="0..1" />
@@ -165,7 +177,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_subjet_teacher">
+          <End Type="universityModel.teacher" Role="teacher" Multiplicity="0..1" />
+          <End Type="universityModel.subjet" Role="subjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subjet">
+              <PropertyRef Name="teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_student">
+          <End Type="universityModel.subjet" Role="subjet" Multiplicity="0..1" />
+          <End Type="universityModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjet">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="idSubjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -181,23 +217,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="student">
-            <EntityTypeMapping TypeName="universityModel.student">
-              <MappingFragment StoreEntitySet="student">
+          <EntitySetMapping Name="subjet">
+            <EntityTypeMapping TypeName="universityModel.subjet">
+              <MappingFragment StoreEntitySet="subjet">
+                <ScalarProperty Name="info" ColumnName="info" />
                 <ScalarProperty Name="maxStudent" ColumnName="maxStudent" />
                 <ScalarProperty Name="teacher" ColumnName="teacher" />
                 <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="user">
-            <EntityTypeMapping TypeName="universityModel.user">
-              <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
-                <ScalarProperty Name="passwordd" ColumnName="passwordd" />
-                <ScalarProperty Name="user1" ColumnName="user" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -209,6 +236,16 @@
                 <ScalarProperty Name="dni" ColumnName="dni" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="universityModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="idSubjet" ColumnName="idSubjet" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user1" ColumnName="user" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

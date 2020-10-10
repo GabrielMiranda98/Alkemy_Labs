@@ -16,9 +16,9 @@ namespace University.Models
     {
         public int id { get; set; }
         public string user1 { get; set; }
-        public string passwordd { get; set; }
-        public Nullable<int> idStudent { get; set; }
+        public string password { get; set; }
+        public Nullable<int> idSubjet { get; set; }
     
-        public virtual student student { get; set; }
+        public virtual subjet subjet { get; set; }
     }
 }
