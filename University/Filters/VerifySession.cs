@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using University.Controllers;
 using University.Models;
-
 namespace University.Filters
 {
     public class VerifySession : ActionFilterAttribute

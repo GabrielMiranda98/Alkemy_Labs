@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 <h2>   Login Admin  </h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" name="btn btn-primary" onclick="document.location.href='@Url.Content("~/Admin/Add")'" value="Add Admin" />
+    </div>
+</div>
 <div class="row">
     <form id="frm">
         <div class="form-group">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using University.Models;
+using University.Models.ViewModels;
 
 namespace University.Controllers
 {
@@ -45,5 +46,31 @@ namespace University.Controllers
                 return Content("Error" + ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Add(AdminViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            using (var db= new universityEntities())
+            {
+                admin admin = new admin();
+                admin.password = model.Password;
+                admin.user = model.User;
+
+                db.admin.Add(admin);
+                db.SaveChanges();
+            }
+            return Redirect(Url.Content("~/Admin/Index"));
+        }
+
+
     }
 }

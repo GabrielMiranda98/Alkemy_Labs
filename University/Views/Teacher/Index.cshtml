@@ -1,9 +1,9 @@
 ﻿@model List<University.Models.TableViewModels.AdminTableTeacher>
 @{
     ViewBag.Title = "Index";
-    
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h2>Teachers: </h2>
@@ -25,11 +25,16 @@
             {
 
                 <tr>
-                    <th>@pElemento.Id</th>
-                    <th>@pElemento.Name</th>
-                    <th>@pElemento.Surname</th>
-                    <th>@pElemento.Active</th>
-                    <th>@pElemento.Dni</th>
+                    <td>@pElemento.Id</td>
+                    <td>@pElemento.Name</td>
+                    <td>@pElemento.Surname</td>
+                    <td>@pElemento.Active</td>
+                    <td>@pElemento.Dni</td>
+                    <td>
+                        <input onclick="jsDelete(@pElemento.Id)" value="Delete Teacher" type="button" name="Delete" class="btn btn-danger" />
+                        <input onclick="document.location.href='@Url.Content("~/Teacher/Edit")'" value="Edit Teacher"type="button" name="Edit" class="btn btn-default" />
+                    </td>
+
 
                 </tr>
             }
@@ -37,5 +42,12 @@
     </div>
 
 </div>
+
+<script>
+    function() {
+
+    }
+
+</script>
 
 

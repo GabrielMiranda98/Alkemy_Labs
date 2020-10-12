@@ -1,0 +1,36 @@
+﻿@model University.Models.ViewModels.TeacherViewModel
+@{
+    ViewBag.Title = "Edit Teacher";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Edit", "Teacher", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+         @Html.HiddenFor(d=>d.Id)
+            @Html.AntiForgeryToken()
+         
+            @Html.LabelFor(d => d.Name)
+            @Html.TextBoxFor(d => d.Name, new { @class = "form-control" })
+
+
+            @Html.LabelFor(d => d.SurName)
+            @Html.TextBoxFor(d => d.SurName, new { @class = "form-control" })
+
+
+            @Html.LabelFor(d => d.Dni)
+            @Html.TextBoxFor(d => d.Dni, new { @class = "form-control" })
+
+            @Html.LabelFor(d => d.Active)
+            @Html.TextBoxFor(d => d.Active, new { @class = "form-control" })
+
+            <div style="text-align:right">
+                <input type="submit" name="btn btn-success" value="Save" />
+
+            </div>
+        }
+    </div>
+
+</div>
