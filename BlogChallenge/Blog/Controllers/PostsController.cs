@@ -11,7 +11,7 @@ using Blog.Models.DB;
 
 namespace Blog.Controllers
 {
-    public class PostController : Controller
+    public class PostsController : Controller
     {
         private blogEntities db = new blogEntities();
 
@@ -47,7 +47,7 @@ namespace Blog.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion")] Post post)
+        public ActionResult Create([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion,Imagen")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Blog.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion,Imagen")] Post post)
         {
             if (ModelState.IsValid)
             {

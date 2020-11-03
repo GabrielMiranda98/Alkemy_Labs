@@ -12,5 +12,7 @@ namespace Blog.Models
         public string Contenido { get; set; }
         public string Categoria { get; set; }
         public Nullable<System.DateTime> FechaDeCreacion { get; set; }
+        public byte[] Imagen { get; set; }
+
     }
 }

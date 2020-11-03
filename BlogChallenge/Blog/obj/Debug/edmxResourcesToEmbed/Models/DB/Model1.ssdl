@@ -9,6 +9,7 @@
     <Property Name="contenido" Type="varchar" MaxLength="300" />
     <Property Name="categoria" Type="varchar" MaxLength="50" />
     <Property Name="fechaDeCreacion" Type="datetime" />
+    <Property Name="imagen" Type="image" />
   </EntityType>
   <EntityContainer Name="blogModelStoreContainer">
     <EntitySet Name="post" EntityType="Self.post" Schema="dbo" store:Type="Tables" />

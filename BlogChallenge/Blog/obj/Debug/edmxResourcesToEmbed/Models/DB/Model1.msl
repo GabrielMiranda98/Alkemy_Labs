@@ -4,11 +4,12 @@
     <EntitySetMapping Name="post">
       <EntityTypeMapping TypeName="blogModel.post">
         <MappingFragment StoreEntitySet="post">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="contenido" ColumnName="contenido" />
-          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="imagen" ColumnName="imagen" />
           <ScalarProperty Name="fechaDeCreacion" ColumnName="fechaDeCreacion" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="contenido" ColumnName="contenido" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

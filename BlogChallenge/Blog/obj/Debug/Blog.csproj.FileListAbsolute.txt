@@ -83,7 +83,6 @@ D:\Alkemy Labs\BlogChallenge\Blog\bin\es\System.Web.Razor.resources.dll
 D:\Alkemy Labs\BlogChallenge\Blog\bin\es\System.Web.WebPages.resources.dll
 D:\Alkemy Labs\BlogChallenge\Blog\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\Alkemy Labs\BlogChallenge\Blog\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.csprojAssemblyReference.cache
 D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.csproj.CoreCompileInputs.cache
 D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.csproj.CopyComplete
 D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.dll
