@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Blog.Models;
 using Blog.Models.DB;
@@ -49,6 +50,11 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion,Imagen")] Post post)
         {
+            HttpPostedFileBase fileBase = Request.Files[0];
+            WebImage image = new WebImage(fileBase.InputStream);
+
+            post.Imagen = image.GetBytes();
+
             if (ModelState.IsValid)
             {
                 db.Posts.Add(post);

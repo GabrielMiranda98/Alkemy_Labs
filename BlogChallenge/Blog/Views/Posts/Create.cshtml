@@ -6,8 +6,12 @@
 
 <h2>@ViewBag.Title</h2>
 
+<form enctype="multipart/form-data">
 
-@using (Html.BeginForm()) 
+
+</form>
+
+@using (Html.BeginForm("Create","Post",FormMethod.Post,new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -19,7 +23,7 @@
             @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Titulo, "El campo es obligatorio", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -27,7 +31,7 @@
             @Html.LabelFor(model => model.Contenido, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Contenido, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Contenido, "El campo es obligatorio", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Contenido, "", new { @class = "text-danger" })
             </div>
         </div>
 
