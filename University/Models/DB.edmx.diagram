@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="universityModel.admin" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="universityModel.subjet" Width="1.5" PointX="2.875" PointY="4" />
         <EntityTypeShape EntityType="universityModel.teacher" Width="1.5" PointX="0.625" PointY="2.25" />
-        <EntityTypeShape EntityType="universityModel.user" Width="1.5" PointX="5.125" PointY="1.125" />
+        <EntityTypeShape EntityType="universityModel.user" Width="1.5" PointX="6.875" PointY="1.625" />
         <AssociationConnector Association="universityModel.FK_admin_teacher" />
         <AssociationConnector Association="universityModel.FK_subjet_teacher" />
         <AssociationConnector Association="universityModel.FK_user_student" />

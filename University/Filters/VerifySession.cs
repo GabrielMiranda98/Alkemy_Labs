@@ -25,6 +25,8 @@ namespace University.Filters
                 filterContext.HttpContext.Response.Redirect("~/Teacher/Index");
 
             }
+
+            
             base.OnActionExecuting(filterContext);
         }
     }
