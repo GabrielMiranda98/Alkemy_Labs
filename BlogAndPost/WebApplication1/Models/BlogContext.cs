@@ -16,5 +16,6 @@ namespace WebApplication1.Models
         }
         public DbSet<Post> blogPosts { get; set; }
 
+        public DbSet<Categoria> Categorias { get; set; }
     }
 }

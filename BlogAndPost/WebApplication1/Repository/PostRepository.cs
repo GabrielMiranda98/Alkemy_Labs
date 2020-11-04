@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication1.Models;
+using System.Data.Entity;
 
 namespace WebApplication1.Repository
 {
@@ -19,16 +20,15 @@ namespace WebApplication1.Repository
 
         }
 
-        internal void Alta(Post model)
+        public void Alta(Post model)
         {
             using (var db = new BlogContext())
             {
                 db.blogPosts.Add(model);
                 db.SaveChanges();
-
             }
+        }
 
 
-                    }
     }
 }

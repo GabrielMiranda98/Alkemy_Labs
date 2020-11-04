@@ -14,6 +14,8 @@
 
         protected override void Seed(WebApplication1.Models.BlogContext context)
         {
+            
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method

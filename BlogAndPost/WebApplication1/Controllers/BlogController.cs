@@ -1,9 +1,12 @@
 ﻿using Blog.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Models;
 using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers
@@ -46,36 +49,47 @@ namespace WebApplication1.Controllers
                     _repo.Alta(model);
                     return RedirectToAction("Index");
                 }
-
             }
             catch (Exception ex)
             {
-                
-
+                Console.WriteLine(ex.Message);
             }
             return View(model);
         }
 
         // GET: Blog/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using(var db = new BlogContext())
+            {
+                Post post = db.blogPosts.Find(id);
+            if (post == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(post);
+            }
+            
         }
 
-        // POST: Blog/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Titulo,Contenido,Imagen,Categoria,FechaDeCreacion")] Post post)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                using (var db = new BlogContext()) 
+                { 
+                db.Entry(post).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(post);
         }
 
         // GET: Blog/Delete/5
