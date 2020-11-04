@@ -14,22 +14,21 @@ namespace Blog.Controllers
 {
     public class PostsController : Controller
     {
-        private blogEntities db = new blogEntities();
+        private blogEntities1 db = new blogEntities1();
 
-        // GET: Posts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            List<post> posts = db.post.ToList();
+            return View(posts);
         }
 
-        // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            post post = db.post.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -37,27 +36,21 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        // GET: Posts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Posts/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion,Imagen")] Post post)
+        public ActionResult Create([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion,Imagen")] post post)
         {
-            HttpPostedFileBase fileBase = Request.Files[0];
-            WebImage image = new WebImage(fileBase.InputStream);
-
-            post.Imagen = image.GetBytes();
-
+            HttpPostedFileBase fileBase = Request.Files[0]; //me representa un objeto y me permite mostrar y administrar un archivo
+            WebImage image = new WebImage(fileBase.InputStream); //apunto al archivo cargado
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
+                post.imagen = image.GetBytes(); //asigno la imagen a mi db
+                db.post.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,14 +58,13 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            post post = db.post.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -80,9 +72,6 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        // POST: Posts/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Titulo,Contenido,Categoria,FechaDeCreacion,Imagen")] Post post)
@@ -96,14 +85,13 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        // GET: Posts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            post post = db.post.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -111,13 +99,12 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Post post = db.Posts.Find(id);
-            db.Posts.Remove(post);
+            post post = db.post.Find(id);
+            db.post.Remove(post);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

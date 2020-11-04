@@ -13,10 +13,10 @@ namespace Blog.Models.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class blogEntities : DbContext
+    public partial class blogEntities1 : DbContext
     {
-        public blogEntities()
-            : base("name=blogEntities")
+        public blogEntities1()
+            : base("name=blogEntities1")
         {
         }
     
@@ -26,7 +26,5 @@ namespace Blog.Models.DB
         }
     
         public virtual DbSet<post> post { get; set; }
-
-        public System.Data.Entity.DbSet<Blog.Models.Post> Posts { get; set; }
     }
 }

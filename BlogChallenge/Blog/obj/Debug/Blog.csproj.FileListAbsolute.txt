@@ -87,4 +87,3 @@ D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.csproj.CoreCompileInputs.cache
 D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.csproj.CopyComplete
 D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.dll
 D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.pdb
-D:\Alkemy Labs\BlogChallenge\Blog\obj\Debug\Blog.csprojAssemblyReference.cache

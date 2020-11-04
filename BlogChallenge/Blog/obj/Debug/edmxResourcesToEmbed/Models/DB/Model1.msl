@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="blogModelStoreContainer" CdmEntityContainer="blogEntities">
+  <EntityContainerMapping StorageEntityContainer="blogModelStoreContainer" CdmEntityContainer="blogEntities1">
     <EntitySetMapping Name="post">
       <EntityTypeMapping TypeName="blogModel.post">
         <MappingFragment StoreEntitySet="post">
-          <ScalarProperty Name="imagen" ColumnName="imagen" />
-          <ScalarProperty Name="fechaDeCreacion" ColumnName="fechaDeCreacion" />
-          <ScalarProperty Name="categoria" ColumnName="categoria" />
-          <ScalarProperty Name="contenido" ColumnName="contenido" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="contenido" ColumnName="contenido" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="fechaDeCreacion" ColumnName="fechaDeCreacion" />
+          <ScalarProperty Name="imagen" ColumnName="imagen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
