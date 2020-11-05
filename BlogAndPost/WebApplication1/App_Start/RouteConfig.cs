@@ -16,7 +16,7 @@ namespace WebApplication1
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Blog", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Jasmine", action = "Run", id = UrlParameter.Optional }
             );
         }
     }
