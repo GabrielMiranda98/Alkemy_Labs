@@ -69,6 +69,7 @@ namespace WebApplication1.Controllers
                 if (ModelState.IsValid)
                 {
                     _repo.Alta(model);
+                    model.Activo = true;
                     return RedirectToAction("Index");
                 }
             }
@@ -109,6 +110,7 @@ namespace WebApplication1.Controllers
                 using (var db = new BlogContext())
                 {
                     db.Entry(post).State = EntityState.Modified;
+                    post.Activo = true;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -144,7 +146,8 @@ namespace WebApplication1.Controllers
             using (var db = new BlogContext())
             {
                 Post post = db.blogPosts.Find(id);
-                db.blogPosts.Remove(post);
+                post.Activo = false;    
+                db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -237,5 +240,14 @@ namespace WebApplication1.Controllers
         }
 
         #endregion
+        #region Listar Eliminados
+
+        public ActionResult Eliminados()
+        {
+            var model = _repo.TraerTodos();
+            return View(model);
+        }
+                #endregion
+
     }
 }

@@ -15,31 +15,37 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                <b style="color:forestgreen; font-size:large; "> @Html.DisplayFor(modelItem => item.Titulo) </b> <br />
+        if (item.Activo == true)
+        {
 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Categoria: <a href="~/Blog/@item.Categoria"> @Html.DisplayFor(modelItem => item.Categoria)</a>
-            </td>
+            <tr>
+                <td>
+                    <b style="color:forestgreen; font-size:large; "> @Html.DisplayFor(modelItem => item.Titulo) </b> <br />
 
-            <td>
-                Fecha de Creacion:  @Html.DisplayFor(modelItem => item.FechaDeCreacion)
-            </td>
-            <td>
-                @Html.ActionLink("Ver más", "Details", new { id = item.Id })
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Categoria: <a href="~/Blog/@item.Categoria"> @Html.DisplayFor(modelItem => item.Categoria)</a>
+                </td>
 
-            </td>
-            <td>
-            </td>
+                <td>
+                    Fecha de Creacion:  @Html.DisplayFor(modelItem => item.FechaDeCreacion)
+                </td>
+                <td>
+                    @Html.ActionLink("Ver más", "Details", new { id = item.Id })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
 
-        </tr>
-        
+                </td>
+                <td>
+                </td>
+
+            </tr>
+
+        }
+
+
     }
 
 </table>
