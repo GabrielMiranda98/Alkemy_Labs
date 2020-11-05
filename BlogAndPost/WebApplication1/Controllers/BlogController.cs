@@ -13,25 +13,45 @@ namespace WebApplication1.Controllers
 {
     public class BlogController : Controller
     {
+        #region Atributos 
         private PostRepository _repo;
-
+        #endregion
+        #region Constructor
         public BlogController()
         {
             _repo = new PostRepository();
         }
+        #endregion
+        #region Index       
         // GET: Blog
+
         public ActionResult Index()
         {
             var model = _repo.TraerTodos();
             return View(model);
         }
+        #endregion
+        #region Detalles
 
         // GET: Blog/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var db = new BlogContext())
+            {
+                Post post = db.blogPosts.Find(id);
+                if (post == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(post);
+            }
         }
-
+        #endregion
+        #region Crear
         // GET: Blog/Create
         public ActionResult Create()
         {
@@ -57,23 +77,25 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
+        #endregion
+        #region Editar
         // GET: Blog/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
-            using(var db = new BlogContext())
+            using (var db = new BlogContext())
             {
                 Post post = db.blogPosts.Find(id);
-            if (post == null)
+                if (post == null)
                 {
                     return HttpNotFound();
                 }
                 return View(post);
             }
-            
+
         }
 
         [HttpPost]
@@ -82,36 +104,89 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var db = new BlogContext()) 
-                { 
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                using (var db = new BlogContext())
+                {
+                    db.Entry(post).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
             }
             return View(post);
         }
 
-        // GET: Blog/Delete/5
-        public ActionResult Delete(int id)
+        #endregion
+        #region Eliminar
+     // GET: Posts/Delete/5
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var db = new BlogContext())
+            {
+                Post post = db.blogPosts.Find(id);
+                if (post == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(post);
+            }
         }
 
-        // POST: Blog/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        // POST: Posts/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
+            using (var db = new BlogContext())
             {
-                // TODO: Add delete logic here
-
+                Post post = db.blogPosts.Find(id);
+                db.blogPosts.Remove(post);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
+        }
+
+        #endregion
+        #region Categorias
+        public ActionResult Economia()
+        {
+            using (var db = new BlogContext())
             {
-                return View();
+                var articuloEconomia = db.blogPosts.Where(x => x.Categoria == "Economia");
+                return View(articuloEconomia);
             }
         }
+
+        public ActionResult Politica()
+        {
+            using (var db = new BlogContext())
+            {
+                var articuloPolitica = db.blogPosts.Where(x => x.Categoria == "Politica");
+                return View(articuloPolitica);
+            }
+        }
+
+        public ActionResult Deporte()
+        {
+            using (var db = new BlogContext())
+            {
+                var articuloDeporte = db.blogPosts.Where(x => x.Categoria == "Deporte");
+                return View(articuloDeporte);
+            }
+        }
+
+        public ActionResult Otro()
+        {
+            using (var db = new BlogContext())
+            {
+                var articuloOtro = db.blogPosts.Where(x => x.Categoria == "Otro");
+                return View(articuloOtro);
+            }
+        }
+        #endregion
+
+
     }
 }

@@ -10,12 +10,9 @@ namespace WebApplication1.Models
     public class BlogContext : DbContext
     {
         public BlogContext()
-        :base("DefaultConnection")
+        : base("DefaultConnection")
         {
-
         }
         public DbSet<Post> blogPosts { get; set; }
-
-        public DbSet<Categoria> Categorias { get; set; }
     }
 }
