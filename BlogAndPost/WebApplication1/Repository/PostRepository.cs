@@ -10,6 +10,10 @@ namespace WebApplication1.Repository
 {
     public class PostRepository
     {
+        /// <summary>
+        /// Lista todos los post ordenador descendientemente por fecha de creacion
+        /// </summary>
+        /// <returns></returns>
         public List<Post> TraerTodos()
         {
             using (var db = new BlogContext())
@@ -19,7 +23,10 @@ namespace WebApplication1.Repository
             }
 
         }
-
+        /// <summary>
+        /// Agrega un post a la base de datos
+        /// </summary>
+        /// <param name="model"></param>
         public void Alta(Post model)
         {
             using (var db = new BlogContext())

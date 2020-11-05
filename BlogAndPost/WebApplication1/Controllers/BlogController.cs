@@ -18,6 +18,9 @@ namespace WebApplication1.Controllers
         private PostRepository _repo;
         #endregion
         #region Constructor
+        /// <summary>
+        /// Constructor para inicializar la variable local
+        /// </summary>
         public BlogController()
         {
             _repo = new PostRepository();
@@ -25,7 +28,10 @@ namespace WebApplication1.Controllers
         #endregion
         #region Index       
         // GET: Blog
-
+        /// <summary>
+        /// Vista de todos los post que esten activos
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var model = _repo.TraerTodos();
@@ -36,6 +42,11 @@ namespace WebApplication1.Controllers
         #region Detalles
 
         // GET: Blog/Details/5
+        /// <summary>
+        /// Detalle del post seleccionado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -55,12 +66,21 @@ namespace WebApplication1.Controllers
         #endregion
         #region Crear
         // GET: Blog/Create
+        /// <summary>
+        /// Retorna la vista de la creacion de un nuevo post
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Blog/Create
+        /// <summary>
+        /// Valida que el modelo sea valido para sumarlo a la base de datos
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Create(Post model)
         {
@@ -83,6 +103,11 @@ namespace WebApplication1.Controllers
         #endregion
         #region Editar
         // GET: Blog/Edit/5
+        /// <summary>
+        /// Busca el id para editarlo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,6 +126,11 @@ namespace WebApplication1.Controllers
 
         }
 
+        /// <summary>
+        /// Accion que edita el post y lo guarda en la base de datos
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Titulo,Contenido,Imagen,Categoria,FechaDeCreacion")] Post post)
@@ -120,7 +150,12 @@ namespace WebApplication1.Controllers
 
         #endregion
         #region Eliminar
-     // GET: Posts/Delete/5
+        // GET: Blog/Edit/5
+        /// <summary>
+        /// Busca el id para eliminarlo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -137,7 +172,11 @@ namespace WebApplication1.Controllers
                 return View(post);
             }
         }
-
+        /// <summary>
+        /// Accion que cambia el estado del post y lo guarda en la base de datos
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -154,7 +193,11 @@ namespace WebApplication1.Controllers
         }
         #endregion 
         #region Listar para Eliminacion
-
+        /// <summary>
+        /// Lista los post para que el usuario elija cual eliminar
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         public ActionResult ElegirEliminar(string searchString)
         {
             using (var db = new BlogContext())
@@ -178,6 +221,10 @@ namespace WebApplication1.Controllers
 
         #endregion
         #region Categorias
+        /// <summary>
+        /// Muestra solo los post de la Categoria Economia
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Economia()
         {
             using (var db = new BlogContext())
@@ -187,7 +234,10 @@ namespace WebApplication1.Controllers
                 return View(articuloEconomia.ToList());
             }
         }
-
+        /// <summary>
+        /// Muestra solo los post de la Categoria Politica
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Politica()
         {
             using (var db = new BlogContext())
@@ -196,7 +246,10 @@ namespace WebApplication1.Controllers
                 return View(articuloPolitica.ToList());
             }
         }
-
+        /// <summary>
+        /// Muestra solo los post de la Categoria Deporte
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Deporte()
         {
             using (var db = new BlogContext())
@@ -205,7 +258,10 @@ namespace WebApplication1.Controllers
                 return View(articuloDeporte.ToList());
             }
         }
-
+        /// <summary>
+        /// Muestra solo los post de la Categoria Otro
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Otro()
         {
             using (var db = new BlogContext())
@@ -216,7 +272,11 @@ namespace WebApplication1.Controllers
         }
         #endregion
         #region Listar para Edicion
-
+        /// <summary>
+        /// Lista los post para que el usuario elija cual editar
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         public ActionResult ElegirEdicion(string searchString)
         {
             using (var db = new BlogContext())
@@ -241,7 +301,10 @@ namespace WebApplication1.Controllers
 
         #endregion
         #region Listar Eliminados
-
+        /// <summary>
+        /// Muestra los post eliminados logicos 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Eliminados()
         {
             var model = _repo.TraerTodos();
