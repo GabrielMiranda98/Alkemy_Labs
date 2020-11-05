@@ -155,7 +155,8 @@ namespace WebApplication1.Controllers
             using (var db = new BlogContext())
             {
                 var articuloEconomia = db.blogPosts.Where(x => x.Categoria == "Economia");
-                return View(articuloEconomia);
+ 
+                return View(articuloEconomia.ToList());
             }
         }
 
@@ -164,7 +165,7 @@ namespace WebApplication1.Controllers
             using (var db = new BlogContext())
             {
                 var articuloPolitica = db.blogPosts.Where(x => x.Categoria == "Politica");
-                return View(articuloPolitica);
+                return View(articuloPolitica.ToList());
             }
         }
 
@@ -173,7 +174,7 @@ namespace WebApplication1.Controllers
             using (var db = new BlogContext())
             {
                 var articuloDeporte = db.blogPosts.Where(x => x.Categoria == "Deporte");
-                return View(articuloDeporte);
+                return View(articuloDeporte.ToList());
             }
         }
 
@@ -182,11 +183,18 @@ namespace WebApplication1.Controllers
             using (var db = new BlogContext())
             {
                 var articuloOtro = db.blogPosts.Where(x => x.Categoria == "Otro");
-                return View(articuloOtro);
+                return View(articuloOtro.ToList());
             }
         }
         #endregion
+        #region Listar
 
+        public ActionResult ElegirEdicion()
+        {
+            var model = _repo.TraerTodos();
+            return View(model);
+        }
 
+        #endregion
     }
 }

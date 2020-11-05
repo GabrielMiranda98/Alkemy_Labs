@@ -1,7 +1,8 @@
+D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\csc.exe
+D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\WebApplication1.dll.config
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\WebApplication1.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\WebApplication1.pdb
-D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\csc.exe
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\csc.exe.config
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\csc.rsp
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\csi.exe
@@ -10,7 +11,6 @@ D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\csi.rsp
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\roslyn\Microsoft.CSharp.Core.targets
@@ -83,8 +83,8 @@ D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\es\System.Web.Razor.resources.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\es\System.Web.WebPages.resources.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\Blog.csprojAssemblyReference.cache
 D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\Blog.csproj.CoreCompileInputs.cache
 D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\Blog.csproj.CopyComplete
 D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\WebApplication1.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\WebApplication1.pdb
+D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\Blog.csprojAssemblyReference.cache

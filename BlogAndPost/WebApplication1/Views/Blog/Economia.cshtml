@@ -7,27 +7,12 @@
 <h2>Economia</h2>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Contenido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Categoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaDeCreacion)
-        </th>
-        <th></th>
-    </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                <b style="color:aqua; font-size:large; "> </b> @Html.DisplayFor(modelItem => item.Titulo) <br />
+                <b style="color:aqua; font-size:large; ">  @Html.DisplayFor(modelItem => item.Titulo)</b> <br />
                 @Html.DisplayFor(modelItem => item.Contenido)
             </td>
         </tr>
@@ -41,12 +26,10 @@
             <td>
                 Fecha de Creacion:  @Html.DisplayFor(modelItem => item.FechaDeCreacion)
             </td>
-            <td>
-                @Html.ActionLink("Editar Post", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Ver más", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
-            </td>
+        
         </tr>
     }
-
-</table>
+    </table>
+<div>
+    @Html.ActionLink("Volver a la pagina principal", "Index")
+</div>
