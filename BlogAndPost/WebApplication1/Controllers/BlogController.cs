@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
@@ -30,6 +31,7 @@ namespace WebApplication1.Controllers
             var model = _repo.TraerTodos();
             return View(model);
         }
+
         #endregion
         #region Detalles
 
@@ -148,6 +150,22 @@ namespace WebApplication1.Controllers
             }
         }
 
+        public ActionResult ElegirEliminar(string searchString)
+        {
+            using (var db = new BlogContext())
+            {
+                var post = from d in db.blogPosts
+                           select d;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    post = post.Where(s => s.Titulo.Contains(searchString));
+                }
+                
+                return View(post.ToList());
+            }
+        }
+
         #endregion
         #region Categorias
         public ActionResult Economia()
@@ -187,12 +205,28 @@ namespace WebApplication1.Controllers
             }
         }
         #endregion
-        #region Listar
+        #region Listar para Edicion
 
-        public ActionResult ElegirEdicion()
+        public ActionResult ElegirEdicion(string searchString)
         {
-            var model = _repo.TraerTodos();
-            return View(model);
+            using (var db = new BlogContext())
+            {
+                var post = from d in db.blogPosts
+                           select d;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    post = post.Where(s => s.Titulo.Contains(searchString));
+                    if (post.Count() == 0)
+                    {
+                        return Content("Titulo no encontrado");
+                    }
+
+                }
+
+               
+                return View(post.ToList());
+            }
         }
 
         #endregion

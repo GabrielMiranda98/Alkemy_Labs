@@ -285,6 +285,7 @@
     <Content Include="Views\Blog\Politica.cshtml" />
     <Content Include="Views\Blog\Deporte.cshtml" />
     <Content Include="Views\Blog\Otro.cshtml" />
+    <Content Include="Views\Blog\ElegirEliminar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

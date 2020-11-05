@@ -19,7 +19,6 @@
             <td>
                 <b style="color:forestgreen; font-size:large; "> @Html.DisplayFor(modelItem => item.Titulo) </b> <br />
 
-                @Html.DisplayFor(modelItem => item.Contenido))
             </td>
         </tr>
         <tr>
@@ -32,6 +31,9 @@
             </td>
             <td>
                 @Html.ActionLink("Ver más", "Details", new { id = item.Id })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+
             </td>
             <td>
             </td>
