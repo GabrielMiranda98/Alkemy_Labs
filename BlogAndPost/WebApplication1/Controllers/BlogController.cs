@@ -149,6 +149,8 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("Index");
             }
         }
+        #endregion 
+        #region Listar para Eliminacion
 
         public ActionResult ElegirEliminar(string searchString)
         {
@@ -160,7 +162,12 @@ namespace WebApplication1.Controllers
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     post = post.Where(s => s.Titulo.Contains(searchString));
+                    if (post.Count() == 0)
+                    {
+                        return Content("Titulo no encontrado");
+                    }
                 }
+
                 
                 return View(post.ToList());
             }

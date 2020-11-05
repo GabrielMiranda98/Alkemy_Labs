@@ -15,7 +15,6 @@ namespace WebApplication1.Repository
             using (var db = new BlogContext())
             {
                 return db.blogPosts.OrderByDescending(x=>x.FechaDeCreacion).ToList();
-
             }
 
         }
