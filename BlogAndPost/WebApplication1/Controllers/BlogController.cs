@@ -44,6 +44,25 @@ namespace WebApplication1.Controllers
             }
 
         }
+        [AllowAnonymous]
+        public ActionResult MostrarImagen(int id)
+        {
+            using (var db = new BlogContext())
+            {
+                Post post = db.blogAndPosts.Find(id);
+
+                byte[] cover = post.Imagen;
+
+                if (cover != null)
+                {
+                    return File(cover, "image/jpg");
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
         #endregion
         #region Index       
         // GET: Blog

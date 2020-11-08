@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.FechaDeCreacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Imagen)
+                <img width="150" src="@Url.Action("MostrarImagen","Blog",new {id=item.Id})" />
             </td>
             <td>
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })

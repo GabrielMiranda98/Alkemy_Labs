@@ -26,7 +26,10 @@
             <td>
                 Fecha de Creacion:  @Html.DisplayFor(modelItem => item.FechaDeCreacion)
             </td>
-        
+            <td>
+                Imagen:
+                <img width="150" src="@Url.Action("MostrarImagen","Blog",new {id=item.Id})" />
+            </td>
         </tr>
     }
     </table>

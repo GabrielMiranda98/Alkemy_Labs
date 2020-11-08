@@ -88,3 +88,5 @@ D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\Blog.csproj.CopyComplete
 D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\WebApplication1.dll
 D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\WebApplication1.pdb
 D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\Blog.csprojAssemblyReference.cache
+D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\WebApplication1.Migrations.inicial.resources
+D:\Alkemy Labs\BlogAndPost\WebApplication1\obj\Debug\Blog.csproj.GenerateResource.cache
