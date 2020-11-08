@@ -314,7 +314,7 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                var articuloDeporte = db.blogAndPosts.Where(x => x.Categoria == "Deporte");
+                var articuloDeporte = db.blogAndPosts.Where(x => x.Categoria == "Deportes");
                 return View(articuloDeporte.ToList());
             }
         }
