@@ -10,9 +10,9 @@ namespace WebApplication1.Models
     public class BlogContext : DbContext
     {
         public BlogContext()
-        : base("DefaultConnection")
+        : base("localhost")
         {
         }
-        public DbSet<Post> blogPosts { get; set; }
+        public DbSet<Post> blogAndPosts { get; set; }
     }
 }

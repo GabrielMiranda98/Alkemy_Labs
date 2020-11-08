@@ -267,7 +267,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Blog\Economia.cshtml" />
     <Content Include="Views\Blog\Delete.cshtml" />
@@ -289,6 +288,7 @@
     <Content Include="Views\Blog\ElegirEliminar.cshtml" />
     <Content Include="Views\Blog\Eliminados.cshtml" />
     <Content Include="Views\Jasmine\SpecRunner.cshtml" />
+    <Content Include="Views\Blog\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

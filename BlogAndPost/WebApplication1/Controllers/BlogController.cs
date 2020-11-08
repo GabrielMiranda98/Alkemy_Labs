@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Repository;
+using System.IO;
+using System.Resources;
 
 namespace WebApplication1.Controllers
 {
@@ -24,6 +26,23 @@ namespace WebApplication1.Controllers
         public BlogController()
         {
             _repo = new PostRepository();
+        }
+        #endregion
+        #region Metodos 
+        private byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            try
+            {
+                byte[] imageBytes;
+                BinaryReader reader = new BinaryReader(image.InputStream);
+                imageBytes = reader.ReadBytes((int)image.ContentLength);
+                return imageBytes;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
         #endregion
         #region Index       
@@ -55,7 +74,7 @@ namespace WebApplication1.Controllers
             }
             using (var db = new BlogContext())
             {
-                Post post = db.blogPosts.Find(id);
+                Post post = db.blogAndPosts.Find(id);
                 if (post == null)
                 {
                     return HttpNotFound();
@@ -72,24 +91,31 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View();
+            Post post = new Post();
+            return View(post);
         }
 
         // POST: Blog/Create
-        /// <summary>
-        /// Valida que el modelo sea valido para sumarlo a la base de datos
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+     
         [HttpPost]
-        public ActionResult Create(Post model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Post model, HttpPostedFileBase ImagenForm)
         {
+
+            if (ImagenForm != null && ImagenForm.ContentLength > 0)
+            {
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(ImagenForm.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(ImagenForm.ContentLength);
+                }
+                model.Imagen = imageData;
+            }
             try
             {
                 if (ModelState.IsValid)
                 {
                     _repo.Alta(model);
-                    model.Activo = true;
                     return RedirectToAction("Index");
                 }
             }
@@ -116,7 +142,7 @@ namespace WebApplication1.Controllers
             }
             using (var db = new BlogContext())
             {
-                Post post = db.blogPosts.Find(id);
+                Post post = db.blogAndPosts.Find(id);
                 if (post == null)
                 {
                     return HttpNotFound();
@@ -164,7 +190,7 @@ namespace WebApplication1.Controllers
             }
             using (var db = new BlogContext())
             {
-                Post post = db.blogPosts.Find(id);
+                Post post = db.blogAndPosts.Find(id);
                 if (post == null)
                 {
                     return HttpNotFound();
@@ -184,8 +210,8 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                Post post = db.blogPosts.Find(id);
-                post.Activo = false;    
+                Post post = db.blogAndPosts.Find(id);
+                //post.Activo = false;
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -202,7 +228,7 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                var post = from d in db.blogPosts
+                var post = from d in db.blogAndPosts
                            select d;
 
                 if (!String.IsNullOrEmpty(searchString))
@@ -214,7 +240,7 @@ namespace WebApplication1.Controllers
                     }
                 }
 
-                
+
                 return View(post.ToList());
             }
         }
@@ -229,8 +255,8 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                var articuloEconomia = db.blogPosts.Where(x => x.Categoria == "Economia");
- 
+                var articuloEconomia = db.blogAndPosts.Where(x => x.Categoria == "Economia");
+
                 return View(articuloEconomia.ToList());
             }
         }
@@ -242,7 +268,7 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                var articuloPolitica = db.blogPosts.Where(x => x.Categoria == "Politica");
+                var articuloPolitica = db.blogAndPosts.Where(x => x.Categoria == "Politica");
                 return View(articuloPolitica.ToList());
             }
         }
@@ -254,7 +280,7 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                var articuloDeporte = db.blogPosts.Where(x => x.Categoria == "Deporte");
+                var articuloDeporte = db.blogAndPosts.Where(x => x.Categoria == "Deporte");
                 return View(articuloDeporte.ToList());
             }
         }
@@ -266,7 +292,7 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                var articuloOtro = db.blogPosts.Where(x => x.Categoria == "Otro");
+                var articuloOtro = db.blogAndPosts.Where(x => x.Categoria == "Otro");
                 return View(articuloOtro.ToList());
             }
         }
@@ -281,7 +307,7 @@ namespace WebApplication1.Controllers
         {
             using (var db = new BlogContext())
             {
-                var post = from d in db.blogPosts
+                var post = from d in db.blogAndPosts
                            select d;
 
                 if (!String.IsNullOrEmpty(searchString))
@@ -294,7 +320,7 @@ namespace WebApplication1.Controllers
 
                 }
 
-               
+
                 return View(post.ToList());
             }
         }
@@ -310,7 +336,7 @@ namespace WebApplication1.Controllers
             var model = _repo.TraerTodos();
             return View(model);
         }
-                #endregion
+        #endregion
 
     }
 }

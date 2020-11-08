@@ -4,12 +4,15 @@
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using WebApplication1.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApplication1.Models.BlogContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            Database.SetInitializer<BlogContext>(new DropCreateDatabaseIfModelChanges<BlogContext>());
+
         }
 
         protected override void Seed(WebApplication1.Models.BlogContext context)

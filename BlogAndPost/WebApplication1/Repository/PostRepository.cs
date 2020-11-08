@@ -6,6 +6,7 @@ using System.Web;
 using WebApplication1.Models;
 using System.Data.Entity;
 
+
 namespace WebApplication1.Repository
 {
     public class PostRepository
@@ -19,7 +20,7 @@ namespace WebApplication1.Repository
             using (var db = new BlogContext())
             {
                
-                return db.blogPosts.OrderByDescending(x=>x.FechaDeCreacion).ToList();
+                return db.blogAndPosts.OrderByDescending(x=>x.FechaDeCreacion).ToList();
             }
 
         }
@@ -31,7 +32,8 @@ namespace WebApplication1.Repository
         {
             using (var db = new BlogContext())
             {
-                db.blogPosts.Add(model);
+                
+                db.blogAndPosts.Add(model);
                 db.SaveChanges();
             }
         }
