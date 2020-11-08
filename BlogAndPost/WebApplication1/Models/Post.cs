@@ -21,8 +21,6 @@ namespace Blog.Models
         [MinLength(5, ErrorMessage = "{0} debe contener más o 10 caracteres")]
         [Display(Name = "Contenido")]
         public string Contenido { get; set; }
-        [MinLength(5, ErrorMessage = "{0} debe contener más o 10 caracteres")]
-        [Display(Name = "Categoria")]
         public string Categoria { get; set; }
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> FechaDeCreacion { get; set; }

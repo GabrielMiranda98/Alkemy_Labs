@@ -48,7 +48,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Imagen)
+
+            <img width="150" " src="@Url.Action("MostrarImagen","Blog",new {id=Model.Id})" />
+
         </dd>
 
     </dl>

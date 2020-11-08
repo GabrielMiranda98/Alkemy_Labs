@@ -115,7 +115,7 @@ namespace WebApplication1.Controllers
         }
 
         // POST: Blog/Create
-     
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Post model, HttpPostedFileBase ImagenForm)
@@ -134,6 +134,7 @@ namespace WebApplication1.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    model.Activo = true;
                     _repo.Alta(model);
                     return RedirectToAction("Index");
                 }
@@ -178,19 +179,33 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titulo,Contenido,Imagen,Categoria,FechaDeCreacion")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Titulo,Contenido,Imagen,Categoria,FechaDeCreacion")] Post post, HttpPostedFileBase ImageForm)
         {
+            if (ImageForm != null && ImageForm.ContentLength > 0)
+            {
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(ImageForm.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(ImageForm.ContentLength);
+                }
+                post.Imagen = imageData;
+
+            }
+
             if (ModelState.IsValid)
             {
                 using (var db = new BlogContext())
                 {
-                    db.Entry(post).State = EntityState.Modified;
                     post.Activo = true;
+                    db.Entry(post).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
             return View(post);
+
+
+
         }
 
         #endregion
@@ -230,13 +245,13 @@ namespace WebApplication1.Controllers
             using (var db = new BlogContext())
             {
                 Post post = db.blogAndPosts.Find(id);
-                //post.Activo = false;
+                post.Activo = false;
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
         }
-        #endregion 
+        #endregion
         #region Listar para Eliminacion
         /// <summary>
         /// Lista los post para que el usuario elija cual eliminar
